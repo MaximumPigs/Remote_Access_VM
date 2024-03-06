@@ -30,6 +30,15 @@ resource "aws_vpc_security_group_ingress_rule" "ssh_inbound_my_ip" {
   ip_protocol       = "tcp"
 }
 
+resource "aws_vpc_security_group_ingress_rule" "rdp_inbound_my_ip" {
+  security_group_id = aws_security_group.security_group.id
+  description       = "RDP Inbound from runner and my IP"
+  from_port         = 3389
+  cidr_ipv4         = "${coalesce(var.my_ip, "192.168.0.1")}/32"
+  to_port           = 3389
+  ip_protocol       = "tcp"
+}
+
 resource "aws_vpc_security_group_ingress_rule" "internal" {
   security_group_id = aws_security_group.security_group.id
   description       = "Internal communication between hosts"

@@ -2,7 +2,7 @@
 
 variable "project" {
   type    = string
-  default = "ami-Remote_Access_VM"
+  default = "Remote_Access_VM"
 }
 
 # provider information
