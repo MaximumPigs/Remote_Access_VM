@@ -2,9 +2,9 @@ resource "aws_instance" "linux" {
 
   count                       = 0
   ami                         = "ami-0d6f74b9139d26bf1"
-  instance_type               = "m5.large"
+  instance_type               = "t3.medium"
   key_name                    = var.key_pair
-  associate_public_ip_address = false
+  associate_public_ip_address = true
   subnet_id                   = aws_subnet.subnet.id
   vpc_security_group_ids      = ["${aws_security_group.security_group.id}"]
 
@@ -33,7 +33,7 @@ resource "aws_instance" "windows" {
   ami                         = "ami-02ed1a17d1bd5f706"
   instance_type               = "m5.large"
   key_name                    = var.key_pair
-  associate_public_ip_address = false
+# associate_public_ip_address = false
   subnet_id                   = aws_subnet.subnet.id
   vpc_security_group_ids      = ["${aws_security_group.security_group.id}"]
 
@@ -50,7 +50,6 @@ resource "aws_instance" "windows" {
   credit_specification {
     cpu_credits = "standard"
   }
-
 }
 
 resource "aws_eip_association" "eip_assoc" {
